@@ -54,7 +54,7 @@
     },
     {
       "type": "shell",
-      "label": "protoc middleman",
+      "label": "Build protobuf code",
       "command": "protoc -I${workspaceFolder} --cpp_out=${workspaceFolder} ${workspaceFolder}/*.proto",
       "options": {
         "cwd": "${fileDirname}"

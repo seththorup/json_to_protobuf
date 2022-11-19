@@ -60,7 +60,7 @@ bool JsonToProtobuf::convert_protobuf_to_json(const Message &proto_msg,
   if (output_file_name != "") {
     std::ofstream json_file_handler;
     json_file_handler.open(output_file_name,
-                           std::ofstream::out | std::ofstream::app);
+                           std::ofstream::out | std::ofstream::trunc);
     json_file_handler << json_string;
     cout << "writing file: " << output_file_name << endl;
 
