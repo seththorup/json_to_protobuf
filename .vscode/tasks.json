@@ -1,0 +1,66 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "type": "cppbuild",
+      "label": "Build All",
+      "command": "/usr/bin/clang++",
+      "args": [
+        "-std=c++20",
+        "-fcolor-diagnostics",
+        "-fansi-escape-codes",
+        "-g",
+        "${workspaceFolder}/*.cpp",
+        "${workspaceFolder}/*.cc",
+        "-o",
+        "${workspaceFolder}/${workspaceFolderBasename}",
+        "`pkg-config --cflags --libs protobuf`",
+        "-I/opt/homebrew/Cellar/boost/1.80.0/include/"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "compiler: /usr/bin/clang++"
+    },
+    {
+      "type": "shell",
+      "label": "clean",
+      "command": "/bin/rm",
+      "args": [
+        "-rvf",
+        "${workspaceFolder}/*.dSYM",
+        "${workspaceFolder}/${workspaceFolderBasename}",
+        "${workspaceFolder}/*.pb.cc",
+        "${workspaceFolder}/*.pb.h",
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Remove all built items"
+    },
+    {
+      "type": "shell",
+      "label": "protoc middleman",
+      "command": "protoc -I${workspaceFolder} --cpp_out=${workspaceFolder} ${workspaceFolder}/*.proto",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "detail": "Compiler for .proto files",
+      "problemMatcher": []
+    }
+  ]
+}

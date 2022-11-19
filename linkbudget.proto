@@ -1,0 +1,131 @@
+syntax = "proto3";
+package LB;
+
+import "google/protobuf/timestamp.proto";
+
+message PAR {
+  double tx_power_dbm = 1;
+  double link_rate_bps = 2;
+  double frequency_hz = 3;
+}
+
+message RadioConfig {
+  double power_backoff_db = 1;
+  double tx_feed_loss_db = 2;
+  double rx_feed_loss_db = 3;
+  double noise_figure_db = 4;
+  uint32 chip_rate_hz = 5;
+}
+
+message DataLinkIDs {
+  string link_ids = 2;
+  string channel_ids = 3;
+  string antenna_ids = 4;
+}
+
+message DataLinks {
+  string node_ids = 1;
+  DataLinkIDs tx_ids = 2;
+  DataLinkIDs rx_ids = 3;
+  PAR par = 5;
+  RadioConfig radio_config = 6;
+}
+
+message SimTimeHeader {
+  double sim_time_sec = 1;
+  double real_time_sec = 2;
+  google.protobuf.Timestamp time_stamp = 3;
+  double event_id = 4;
+}
+
+message DataLinkID {
+  uint32 link_id = 2;
+  uint32 channel_id = 3;
+  uint32 antenna_id = 4;
+}
+
+message NavDeg {
+  double lat = 1;
+  double lon = 2;
+  double atl_m = 3;
+  double heading = 4;
+  double pitch = 5;
+  double roll = 6;
+}
+
+message DOA {
+  SimTimeHeader time = 1;
+  uint32 node_id = 2;
+  DataLinkID id_a = 3;
+  DataLinkID id_b = 4;
+  NavDeg a_nav_deg = 5;
+  NavDeg b_nav_deg = 6;
+  double distance_m = 7;
+  double az_a_tofrom_b = 8;
+  double el_a_tofrom_b = 9;
+  double az_b_tofrom_a = 10;
+  double el_b_tofrom_a = 11;
+}
+
+message Band {
+  uint32 id = 1;
+  uint32 band_start_freq_hz = 2;
+  uint32 band_end_freq_hz = 3;
+}
+message Antenna {
+  string name = 1;
+  double band_id = 2;
+}
+
+message AntennaGain {
+  SimTimeHeader time = 1;
+  uint32 node_id = 2;
+  DataLinkID tx_id = 3;
+  DataLinkID rx_id = 4;
+  repeated Antenna antenna = 5;
+  double tx_gain_dbi = 6;
+  double rx_gain_dbi = 7;
+}
+
+message PathLoss {
+  SimTimeHeader time = 1;
+  uint32 node_id = 2;
+  DataLinkID tx_id = 3;
+  DataLinkID rx_id = 4;
+  double distance_m = 5;
+  double path_loss_db = 6;
+}
+
+message RxPower {
+  SimTimeHeader time = 1;
+  uint32 node_id = 2;
+  DataLinkID tx_id = 3;
+  DataLinkID rx_id = 4;
+  uint32 link_rate_bps = 5;
+  uint32 frequency_hz = 6;
+  double tx_power_dbm = 7;
+  double backoff_power_db = 8;
+  double tx_feed_loss_db = 9;
+  double tx_gain_dbi = 10;
+  double path_loss_db = 11;
+  double rx_gain_dbi = 12;
+  double polarization_loss_db = 13;
+  double rx_power_dbm = 14;
+}
+
+message LinkBudget {
+  SimTimeHeader time = 1;
+  uint32 node_id = 2;
+  DataLinkID tx_id = 3;
+  DataLinkID rx_id = 4;
+  double rx_power_dbm = 5;
+  double interference_mw = 6;
+  double rx_feed_loss_db = 7;
+  uint32 chip_rate_hz = 8;
+  double noise_figure_db = 9;
+  double polarization_loss_db = 10;
+  double co_chan_interf_mw_hz = 11;
+  double esn0_db = 12;
+}
+
+message DataLinksList { repeated DataLinks data_links_list = 1; }     
