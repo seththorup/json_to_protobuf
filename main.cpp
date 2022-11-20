@@ -18,15 +18,15 @@ int main() {
   cout << "********** JsonToProtobuf Example *********" << endl;
   cout << "Start json file to protobuf converstion" << endl;
 
-  // Json property tree object
-  ptree json_file_ptree;
-
   // Two input values json file name and json child string
   // the child string maps to the protobuf
   // Todo pass in file and child string as argument
   string child_str{"data_links"};
   string json_config_file_name{"example_config.json"};
 
+
+  // Json property tree object
+  ptree json_file_ptree;
   if (read_json(json_config_file_name, json_file_ptree);
       json_file_ptree.empty()) {
     cout << "File not found" << endl;
