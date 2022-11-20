@@ -70,4 +70,5 @@ bool JsonToProtobuf::convert_protobuf_to_json(const Message &proto_msg,
   return status;
 }
 
+
 } // namespace Thorup

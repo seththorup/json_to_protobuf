@@ -128,4 +128,4 @@ message LinkBudget {
   double esn0_db = 12;
 }
 
-message DataLinksList { repeated DataLinks data_links_list = 1; }     
+message DataLinksList { repeated DataLinks data_links = 1; }     
