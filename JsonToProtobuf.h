@@ -7,7 +7,7 @@
 namespace Thorup {
 
 class JsonToProtobuf {
-private:
+protected:
   google::protobuf::util::JsonOptions m_options;
 
 public:
